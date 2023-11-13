@@ -21,7 +21,9 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
 
 
 
-
+app.get('/', (req, res) => {
+    res.send("Hello World")
+}) 
 
 // Application functions
 app.use('/api/user', require('./routes/userRoutes'))
