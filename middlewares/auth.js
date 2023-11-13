@@ -15,7 +15,7 @@ const auth = asyncHandler(async (req, res, next) => {
                         error: 'Unauthorized - token failed',
                     })
                 }
-                req.user = decoded.payload;
+                req.user = decoded;
                 console.log("LoggedIn User Info", req.user);
                 next();
             });
