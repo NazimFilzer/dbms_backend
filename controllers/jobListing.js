@@ -1,5 +1,16 @@
 const JobListing = require('../models/jobListing');
 
+const getAllJobs = async (req, res) => {
+    try {
+        const jobListings = await JobListing.find().populate('postedBy', 'name email');
+        res.json({ message: "Successfully fetched", data: jobListings });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
 const createJob = async (req, res) => {
     try {
         const { title, company, location, description, requirements, skills, type } = req.body;
@@ -24,8 +35,6 @@ const createJob = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
-
 
 // Edit a job listing
 const editJob = async (req, res) => {
@@ -77,4 +86,4 @@ const deleteJob = async (req, res) => {
     }
 };
 
-module.exports = { createJob, editJob, deleteJob };
+module.exports = { createJob, editJob, deleteJob , getAllJobs};
