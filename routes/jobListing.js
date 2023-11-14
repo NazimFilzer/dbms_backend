@@ -8,7 +8,7 @@ const router = express.Router()
 
 // BASE URL - /api/list-job
 
-router.get('/', getAllJobs)
+router.get('/',auth, getAllJobs)
 router.post('/create', auth, createJob)
 router.post('/edit/:id', auth, editJob)
 router.post('/delete/:id', auth, deleteJob)
