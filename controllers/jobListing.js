@@ -2,7 +2,7 @@ const JobListing = require('../models/jobListing');
 
 const getAllJobs = async (req, res) => {
     try {
-        const jobListings = await JobListing.find().populate('postedBy', 'name email');
+        const jobListings = await JobListing.find({postedBy:req.user.id}).populate('postedBy', 'name email');
         res.json({ message: "Successfully fetched", data: jobListings });
     } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ const createJob = async (req, res) => {
         res.status(201).json({ message: "Successfully Created", data: savedJobListing });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message});
     }
 }
 
