@@ -10,6 +10,23 @@ const getAllJobs = async (req, res) => {
     }
 }
 
+const getSpecificJob = async (req, res) => {
+    try {
+        const jobId = req.params.id;
+
+        const jobListing = await JobListing.findById(jobId).populate('postedBy', 'name email');
+
+        if (!jobListing) {
+            return res.status(404).json({ error: 'Job Listing not found' });
+        }
+
+        res.json({ message: "Successfully fetched", data: jobListing });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 
 const createJob = async (req, res) => {
     try {
@@ -86,4 +103,4 @@ const deleteJob = async (req, res) => {
     }
 };
 
-module.exports = { createJob, editJob, deleteJob , getAllJobs};
+module.exports = { createJob, editJob, deleteJob , getAllJobs,getSpecificJob};
