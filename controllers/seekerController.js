@@ -49,7 +49,7 @@ const applyForJob = async (req, res) => {
 
 const getAppliedJobs = async (req, res) => {
     try {
-        const application = await Application.find({ user: req.user.id })
+        const application = await Application.find({ user: req.user.id }).populate('job');
         res.json({ message: "Successfully fetched", data: application });
     } catch (error) {
         console.error(error);
