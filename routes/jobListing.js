@@ -1,5 +1,5 @@
 const express = require('express');
-const { editJob, deleteJob, createJob,getAllJobs,getSpecificJob } = require('../controllers/jobListing');
+const { editJob, deleteJob, createJob,getAllJobs,getSpecificJob,getApplication } = require('../controllers/jobListing');
 const auth = require('../middlewares/auth');
 
 const router = express.Router()
@@ -13,6 +13,9 @@ router.get('/:id',auth, getSpecificJob)
 router.post('/create', auth, createJob)
 router.post('/edit/:id', auth, editJob)
 router.post('/delete/:id', auth, deleteJob)
+
+// recruiter
+router.get('/application/:id', auth, getApplication)
 
 
 

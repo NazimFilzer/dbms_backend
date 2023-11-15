@@ -1,4 +1,16 @@
 const JobListing = require('../models/jobListing');
+const Application = require('../models/application');
+
+const getApplication = async (req, res) => {
+    try {
+        const application = await Application.find({ job: req.params.id });
+        res.json({ message: "Successfully fetched", data: application });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+}
+
 
 const getAllJobs = async (req, res) => {
     try {
@@ -103,4 +115,4 @@ const deleteJob = async (req, res) => {
     }
 };
 
-module.exports = { createJob, editJob, deleteJob , getAllJobs,getSpecificJob};
+module.exports = { createJob, editJob, deleteJob , getAllJobs,getSpecificJob,getApplication};
