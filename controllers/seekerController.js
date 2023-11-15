@@ -42,7 +42,7 @@ const applyForJob = async (req, res) => {
         res.status(201).json({ message: 'Application submitted successfully', application });
     } catch (error) {
         console.error('Error submitting application:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
