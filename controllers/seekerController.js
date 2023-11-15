@@ -1,4 +1,5 @@
 const JobListing = require('../models/jobListing');
+const Application = require('../models/application');
 
 const getEveryJobs = async (req, res) => {
     try {
@@ -10,4 +11,39 @@ const getEveryJobs = async (req, res) => {
     }
 }
 
-module.exports = { getEveryJobs }
+const applyForJob = async (req, res) => {
+    try {
+        const { name, email, phone, location, qualifications, skills, experience } = req.body;
+        const jobId = req.params.id;
+        const user=req.user.id // Assuming jobId is passed in the route parameters
+
+        // Check if the job exists
+        const job = await JobListing.findById(jobId);
+        if (!job) {
+            return res.status(404).json({ error: 'Job not found' });
+        }
+
+        // Create a new application
+        const application = new Application({
+            user,
+            job: jobId,
+            name,
+            email,
+            phone,
+            location,
+            qualifications,
+            skills,
+            experience,
+        });
+
+        // Save the application
+        await application.save();
+
+        res.status(201).json({ message: 'Application submitted successfully', application });
+    } catch (error) {
+        console.error('Error submitting application:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = { getEveryJobs,applyForJob }
