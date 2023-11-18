@@ -29,9 +29,8 @@ app.get('/', (req, res) => {
 app.use('/api/user', require('./routes/userRoutes'))
 app.use('/api/list-job', require('./routes/jobListing'))
 app.use('/api/seeker', require('./routes/seekerRoutes'))
-// app.use('/api/group', require('./routes/groupRoutes'))
-// app.use('/api/service', require('./routes/serviceRoutes'))
-// app.use('/api/pg', require('./routes/pgRoutes'))
+app.use('/api/admin', require('./routes/adminRoutes'))
+
 
 
 // MiddleWares
