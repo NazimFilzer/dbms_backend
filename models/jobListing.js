@@ -30,6 +30,7 @@ const jobListingSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    salary: Number,
 });
 
 const JobListing = mongoose.model('JobListing', jobListingSchema);

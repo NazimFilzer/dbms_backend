@@ -103,6 +103,7 @@ const deleteJob = async (req, res) => {
         const jobId = req.params.id;
 
         const deletedJobListing = await JobListing.findByIdAndDelete(jobId);
+        const applications = await Application.deleteMany({ job: jobId });
 
         if (!deletedJobListing) {
             return res.status(404).json({ error: 'Job Listing not found' });
