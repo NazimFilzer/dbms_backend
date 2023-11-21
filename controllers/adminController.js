@@ -1,6 +1,7 @@
 const JobListing = require('../models/jobListing');
 const Application = require('../models/application');
 const User = require('../models/user');
+const Company = require('../models/company');
 
 const login = async (req, res) => {
     try {
@@ -100,6 +101,8 @@ const deleteJob = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find({});
+        const company= await Company.find({});
+        users.push(...company)
         res.json({ message: "Successfully fetched", data: users });
     } catch (error) {
         console.error(error);

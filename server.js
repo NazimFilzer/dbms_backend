@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 }) 
 
 // Application functions
-app.use('/api/user', require('./routes/userRoutes'))
+app.use('/api/', require('./routes/userRoutes'))
 app.use('/api/list-job', require('./routes/jobListing'))
 app.use('/api/seeker', require('./routes/seekerRoutes'))
 app.use('/api/admin', require('./routes/adminRoutes'))

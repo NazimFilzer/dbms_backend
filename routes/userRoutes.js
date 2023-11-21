@@ -1,13 +1,16 @@
 const express = require('express')
-const { login, signup } = require('../controllers/user/userAuth')
+const { login, signup, signupComp, loginComp } = require('../controllers/user/userAuth')
 const router = express.Router()
 
 
 
-// BASE URL - /api/auth
+// BASE URL - /api/
 
-router.post('/signup', signup)
-router.post('/login', login)
+router.post('/seeker/signup', signup)
+router.post('/seeker/login', login)
+
+router.post('/company/signup', signupComp)
+router.post('/company/login', loginComp)
 
 router.post('/logout', (req, res) => {
     req.session.destroy((err) => {
